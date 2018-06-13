@@ -9,6 +9,7 @@ export class NodeService {
   private apiUrl = 'http://localhost:8181/api/node/';
   private _rootNode = null;
   private _selectedNode = null;
+  private _keys = [];
   
   get selected() {return this._selectedNode; }
   get root() {
@@ -18,6 +19,9 @@ export class NodeService {
     
     return this.get(0).subscribe(n => {
       let children: Node[] = [];
+      let node = new Node();
+      Object.keys(node).forEach(key => console.log(key));
+      // console.log(Object.getOwnPropertyNames(node));
       this._rootNode = Object.assign(new Node(), n);
       this._rootNode.children = children;
       console.log(this._rootNode);
@@ -30,6 +34,11 @@ export class NodeService {
   get(id: number): Observable<Node> {
     return this.http.get(this.apiUrl + id)
       .map((response: Response) => {
+        // preload object keys from root node
+        if (id === 0) {
+          Object.keys(response).forEach(key => {this._keys.push(key);});
+        }
+        console.log(this._keys);
         return response;
       }
     );
