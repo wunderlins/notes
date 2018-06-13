@@ -18,17 +18,6 @@
  */
 
 export class Node {
-  /*
-  type: number = 0;
-  id: number = -1;
-  name: string = ''; 
-  description: string = ''; 
-  progress: number = 0;
-  numChildren: number = 0; 
-  ctime = Date.now();
-  mtime = Date.now(); 
-  parentId: number = 0;
-  */
   constructor(
     type: number = 0,
     id: number = -1,
@@ -38,7 +27,13 @@ export class Node {
     numChildren: number = 0, 
     ctime = Date.now(),
     mtime = Date.now(), 
-    parentId: number = 0
-  
+    parentId: number = 0,
+    children: Node[] = []
   ) {}
+  
+  /*
+  get childNodes(): Node[] {
+    return;
+  }
+  */
 }
