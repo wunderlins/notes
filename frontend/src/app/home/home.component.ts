@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Node } from '../node';
-import { NodeService } from '../node.service';
+import { NodeService, User } from '../node.service';
 
 
 @Component({
@@ -15,9 +15,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.service.get(1).subscribe(n => {
-      this.selected = n;
-      // TODO: convert json into local Note object
-      console.log(n);
+      this.selected = Object.assign(new User(), n);
+      console.log(this.selected);
     });
   }
 
